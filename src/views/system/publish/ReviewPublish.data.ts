@@ -63,6 +63,14 @@ export const searchFormSchema: FormSchema[] = [
     field: 'xqName',
     component: 'Input',
   },
+  {
+    label: '系统名称',
+    field: 'systems',
+    component: 'Input',
+    colProps: {
+      span: 12,
+    },
+  },
 ];
 
 export const formSchema: FormSchema[] = [
