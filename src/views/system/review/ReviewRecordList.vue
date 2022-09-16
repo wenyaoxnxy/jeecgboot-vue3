@@ -44,7 +44,16 @@
   import ReviewRecordModal from './modules/ReviewRecordModal.vue';
   import ReviewCodeModal from '../code/modules/ReviewCodeModal.vue';
   import { columns, searchFormSchema } from './ReviewRecord.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl, addCodeReview, addPublishReview } from './ReviewRecord.api';
+  import {
+    list,
+    deleteOne,
+    batchDelete,
+    getImportUrl,
+    getExportUrl,
+    addCodeReview,
+    addPublishReview,
+    addDesignReview
+  } from "./ReviewRecord.api";
   import { assignWith } from 'lodash-es';
   import { useRouter } from 'vue-router';
   const router = useRouter();
@@ -201,7 +210,7 @@
     let result = await addDesignReview({ id: record.id, xqNumber: record.xqNumber, kjxqNum: record.kjxqNum, ittaskNum: record.ittaskNum, xqName: record.xqName, systems: record.systems }, reload);
     console.log(result, '======>');
     router.push({
-      path: '/system/publish',
+      path: '/system/design',
       query: {
         id: result.id,
       },

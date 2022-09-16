@@ -84,3 +84,12 @@ export const addPublishReview = (params) => {
   let url = Api.addPublishReview;
   return defHttp.post({url: url, data: params});
 }
+
+/**
+ * 初始化概设评审记录
+ * @param params
+ */
+export const addDesignReview = (params) => {
+  let url = Api.addDesignReview;
+  return defHttp.post({url: url, data: params});
+}
