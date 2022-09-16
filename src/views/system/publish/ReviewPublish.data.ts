@@ -33,6 +33,9 @@ export const columns: BasicColumn[] = [
     title: '系统名称',
     align: 'center',
     dataIndex: 'systems',
+    customRender: ({ text }) => {
+      return render.renderDict(text, 'system_name');
+    },
   },
   {
     title: '评审阶段',
@@ -66,9 +69,13 @@ export const searchFormSchema: FormSchema[] = [
   {
     label: '系统名称',
     field: 'systems',
-    component: 'Input',
     colProps: {
       span: 12,
+    },
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'system_name',
+      placeholder: '请选择系统名称',
     },
   },
 ];
@@ -111,9 +118,13 @@ export const formSchema: FormSchema[] = [
   {
     label: '系统名称',
     field: 'systems',
-    component: 'Input',
     colProps: {
       span: 12,
+    },
+    component: 'JDictSelectTag',
+    componentProps: {
+      dictCode: 'system_name',
+      placeholder: '请选择系统名称',
     },
   },
   {
