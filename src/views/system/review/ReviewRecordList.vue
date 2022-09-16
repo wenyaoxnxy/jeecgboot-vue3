@@ -197,11 +197,14 @@
   /**
    * 发起概要设计评审
    */
-  function handDesignReview(record: Recordable) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-      showFooter: false,
+  async function handDesignReview(record: Recordable) {
+    let result = await addDesignReview({ id: record.id, xqNumber: record.xqNumber, kjxqNum: record.kjxqNum, ittaskNum: record.ittaskNum, xqName: record.xqName, systems: record.systems }, reload);
+    console.log(result, '======>');
+    router.push({
+      path: '/system/publish',
+      query: {
+        id: result.id,
+      },
     });
   }
 

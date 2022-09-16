@@ -11,6 +11,7 @@ enum Api {
   exportXls = '/review/reviewRecord/exportXls',
   addCodeReview = '/review/reviewRecord/addCodeReview',
   addPublishReview = '/review/reviewRecord/addPublishReview',
+  addDesignReview = '/review/reviewRecord/addDesignReview',
 }
 /**
  * 导出api
