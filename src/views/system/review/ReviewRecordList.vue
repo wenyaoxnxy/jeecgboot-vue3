@@ -180,7 +180,7 @@
    */
   async function handPublishReview(record: Recordable) {
     //let result = addCodeReview({xqNumber: record.xqNumber,kjxqNum:record.kjxqNum,ittaskNum:record.ittaskNum}, reload);
-    let result = await addPublishReview({ id: record.id, xqNumber: record.xqNumber, kjxqNum: record.kjxqNum, ittaskNum: record.ittaskNum, xqName: record.xqName, systems: record.systems }, reload);
+    let result = await addPublishReview({ id: record.id, xqNumber: record.xqNumber, kjxqNum: record.kjxqNum, ittaskNum: record.ittaskNum, xqName: record.xqName, systems: record.systems, versionplan: record.versionplan}, reload);
     console.log(result, '======>');
     router.push({
       path: '/system/publish',
@@ -232,7 +232,10 @@
       },
       {
         label: '发起上线评审',
-        onClick: handPublishReview.bind(null, record),
+        popConfirm: {
+          title: '请确认本次窗口上线内容均已维护至评审记录列表，将会以系统及投产窗口维度创建上线评审记录，确认是否发起',
+          confirm: handPublishReview.bind(null, record),
+        },
       },
       {
         label: '详情',

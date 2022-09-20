@@ -53,6 +53,11 @@ export const columns: BasicColumn[] = [
       return render.renderDict(text, 'review_status');
     },
   },
+  {
+    title: '投产日期',
+    dataIndex: 'versionplan',
+    width: '100px',
+  },
 ];
 
 export const searchFormSchema: FormSchema[] = [
@@ -135,5 +140,10 @@ export const formSchema: FormSchema[] = [
       dictCode: 'review_status',
       placeholder: '评审阶段',
     },
+  },
+  {
+    label: '投产日期',
+    field: 'versionplan',
+    component: 'Input',
   },
 ];

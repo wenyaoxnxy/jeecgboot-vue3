@@ -7,35 +7,17 @@ import { readonly } from 'vue';
 //列表数据
 export const columns: BasicColumn[] = [
   {
-    title: '需求编号',
-    align: 'center',
-    dataIndex: 'xqNumber',
-    width: '125px',
-  },
-  {
-    title: '需求名称',
-    align: 'center',
-    dataIndex: 'xqName',
-  },
-  {
-    title: '科技需求编号',
-    align: 'center',
-    dataIndex: 'kjxqNum',
-    width: '160px',
-  },
-  {
-    title: '科技子任务编号',
-    align: 'center',
-    dataIndex: 'ittaskNum',
-    width: '190px',
-  },
-  {
     title: '系统名称',
     align: 'center',
     dataIndex: 'systems',
     customRender: ({ text }) => {
       return render.renderDict(text, 'system_name');
     },
+  },
+  {
+    title: '上线日期',
+    align: 'center',
+    dataIndex: 'versionplan',
   },
   {
     title: '评审阶段',
@@ -49,21 +31,18 @@ export const columns: BasicColumn[] = [
     title: '评审人员',
     align: 'center',
     dataIndex: 'reviewMembers',
-    // customRender: ({ text }) => {
-    //   return render.renderDict(text, 'review_members');
-    // },
   },
 ];
 //查询数据
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '需求编号',
-    field: 'xqNumber',
+    label: '系统名称',
+    field: 'systems',
     component: 'Input',
   },
   {
-    label: '需求名称',
-    field: 'xqName',
+    label: '上线日期',
+    field: 'versionplan',
     component: 'Input',
   },
   {
@@ -84,47 +63,19 @@ export const formSchema: FormSchema[] = [
   // TODO 主键隐藏字段，目前写死为ID
   { label: '', field: 'id', component: 'Input', show: false },
   {
-    label: '需求编号',
-    field: 'xqNumber',
-    component: 'Input',
-    colProps: {
-      span: 12,
-    },
-  },
-  {
-    label: '需求名称',
-    field: 'xqName',
-    component: 'Input',
-    colProps: {
-      span: 12,
-    },
-  },
-  {
-    label: '科技需求编号',
-    field: 'kjxqNum',
-    component: 'Input',
-    colProps: {
-      span: 12,
-    },
-  },
-  {
-    label: '科技子任务编号',
-    field: 'ittaskNum',
-    component: 'Input',
-    colProps: {
-      span: 12,
-    },
-  },
-  {
     label: '系统名称',
     field: 'systems',
+    component: 'Input',
     colProps: {
       span: 12,
     },
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'system_name',
-      placeholder: '请选择系统名称',
+  },
+  {
+    label: '上线日期',
+    field: 'versionplan',
+    component: 'Input',
+    colProps: {
+      span: 12,
     },
   },
   {
@@ -138,10 +89,14 @@ export const formSchema: FormSchema[] = [
       dictCode: 'step_status',
       placeholder: '请选择当前阶段',
     },
+
   },
   {
     label: '评审人员',
     field: 'reviewMembers',
+    colProps: {
+      span: 12,
+    },
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'review_members',
@@ -149,9 +104,82 @@ export const formSchema: FormSchema[] = [
       mode: 'multiple',
     },
   },
-  //},
 ];
 //子表表格配置
+export const reviewPublishColumns: JVxeColumn[] = [
+  {
+    title: '关联ID',
+    key: 'refId',
+    type: JVxeTypes.hidden,
+    width: '200px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '需求编号',
+    key: 'xqNumber',
+    type: JVxeTypes.normal,
+    width: '130px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '需求名称',
+    key: 'xqName',
+    type: JVxeTypes.normal,
+    width: '220px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '科技需求编号',
+    key: 'kjxqNum',
+    type: JVxeTypes.normal,
+    width: '170px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '科技子任务编号',
+    key: 'ittaskNum',
+    type: JVxeTypes.normal,
+    width: '190px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '系统名称',
+    key: 'systems',
+    type: JVxeTypes.hidden,
+    width: '200px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '评审阶段',
+    key: 'reviewStep',
+    type: JVxeTypes.hidden,
+    width: '200px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '评审人员',
+    key: 'reviewMembers',
+    type: JVxeTypes.hidden,
+    width: '200px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+  {
+    title: '上线日期',
+    key: 'versionplan',
+    type: JVxeTypes.hidden,
+    width: '200px',
+    placeholder: '请输入${title}',
+    defaultValue: '',
+  },
+];
 export const reviewPublishDetailColumns: JVxeColumn[] = [
   {
     title: '关联ID',

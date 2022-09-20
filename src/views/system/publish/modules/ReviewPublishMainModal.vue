@@ -6,7 +6,21 @@
           <BasicForm @register="registerForm" ref="formRef" :labelCol="{ span: 8 }" />
           <!-- 子表单区域 -->
           <a-dev v-model:activeKey="activeKey" @change="handleChangeTabs">
-            <a-dev tab="上线评审明细记录" key="reviewPublishDetail" :forceRender="true">
+            <a-dev tab="上线评审需求明细记录" key="reviewPublish" :forceRender="true">
+              <JVxeTable
+                keep-source
+                resizable
+                ref="reviewPublish"
+                :loading="reviewPublishTable.loading"
+                :columns="reviewPublishTable.columns"
+                :dataSource="reviewPublishTable.dataSource"
+                :maxHeight="300"
+                :rowNumber="false"
+                :rowSelection="false"
+                :toolbar="false"
+              />
+            </a-dev>
+            <a-dev tab="上线评审问题记录" key="reviewPublishDetail" :forceRender="true">
               <JVxeTable
                 keep-source
                 resizable
@@ -23,7 +37,7 @@
           </a-dev>
         </a-col>
         <a-col :span="12">
-          <a-dev tab="上线评审检查清单检查结果" key="reviewPublishChecklistResult" :forceRender="true">
+          <a-dev tab="上线评审检查清单记录列表" key="reviewPublishChecklistResult" :forceRender="true">
             <JVxeTable
               keep-source
               resizable
@@ -31,7 +45,7 @@
               :loading="reviewPublishChecklistResultTable.loading"
               :columns="reviewPublishChecklistResultTable.columns"
               :dataSource="reviewPublishChecklistResultTable.dataSource"
-              :maxHeight="812"
+              :maxHeight="500"
               :rowNumber="false"
               :rowSelection="false"
               :toolbar="false"
@@ -48,17 +62,23 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods.ts';
-  import { formSchema, reviewPublishDetailColumns, reviewPublishChecklistResultColumns } from '../ReviewPublish.data';
-  import { saveOrUpdate, reviewPublishDetailList, reviewPublishChecklistResultList } from '../ReviewPublish.api';
+  import { formSchema, reviewPublishColumns, reviewPublishDetailColumns, reviewPublishChecklistResultColumns } from '../ReviewPublishMain.data';
+  import { saveOrUpdate, reviewPublishList, reviewPublishDetailList, reviewPublishChecklistResultList } from '../ReviewPublishMain.api';
   import { VALIDATE_FAILED } from '/@/utils/common/vxeUtils';
   // Emits声明
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
-  const refKeys = ref(['reviewPublishDetail', 'reviewPublishChecklistResult']);
-  const activeKey = ref('reviewPublishDetail');
+  const refKeys = ref(['reviewPublish', 'reviewPublishDetail', 'reviewPublishChecklistResult']);
+  const activeKey = ref('reviewPublish');
+  const reviewPublish = ref();
   const reviewPublishDetail = ref();
   const reviewPublishChecklistResult = ref();
-  const tableRefs = { reviewPublishDetail, reviewPublishChecklistResult };
+  const tableRefs = { reviewPublish, reviewPublishDetail, reviewPublishChecklistResult };
+  const reviewPublishTable = reactive({
+    loading: false,
+    dataSource: [],
+    columns: reviewPublishColumns,
+  });
   const reviewPublishDetailTable = reactive({
     loading: false,
     dataSource: [],
@@ -82,13 +102,11 @@
     setModalProps({ confirmLoading: false, showCancelBtn: data?.showFooter, showOkBtn: data?.showFooter });
     isUpdate.value = !!data?.isUpdate;
     if (unref(isUpdate)) {
-      //if (data.record.reviewMembers && !Array.isArray(data.record.reviewMembers)) {
-      //data.record.reviewMembers = data.record.reviewMembers.split(',');
-      //}
       //表单赋值
       await setFieldsValue({
         ...data.record,
       });
+      requestSubTableData(reviewPublishList, { id: data?.record?.id }, reviewPublishTable);
       requestSubTableData(reviewPublishDetailList, { id: data?.record?.id }, reviewPublishDetailTable);
       requestSubTableData(reviewPublishChecklistResultList, { id: data?.record?.id }, reviewPublishChecklistResultTable);
     }
@@ -103,7 +121,8 @@
 
   async function reset() {
     await resetFields();
-    activeKey.value = 'reviewPublishDetail';
+    activeKey.value = 'reviewPublish';
+    reviewPublishTable.dataSource = [];
     reviewPublishDetailTable.dataSource = [];
     reviewPublishChecklistResultTable.dataSource = [];
   }
@@ -111,8 +130,9 @@
     let main = Object.assign({}, allValues.formValue);
     return {
       ...main, // 展开
-      reviewPublishDetailList: allValues.tablesValue[0].tableData,
-      reviewPublishChecklistResultList: allValues.tablesValue[1].tableData,
+      reviewPublishList: allValues.tablesValue[0].tableData,
+      reviewPublishDetailList: allValues.tablesValue[1].tableData,
+      reviewPublishChecklistResultList: allValues.tablesValue[2].tableData,
     };
   }
 

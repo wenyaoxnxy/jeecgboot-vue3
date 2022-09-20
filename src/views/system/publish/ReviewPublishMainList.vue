@@ -28,27 +28,24 @@
       </template>
     </BasicTable>
     <!-- 表单区域 -->
-    <ReviewPublishModal @register="registerModal" @success="handleSuccess" />
+    <ReviewPublishMainModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref, computed, unref, onMounted } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { ref, computed, unref } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { useModal } from '/@/components/Modal';
-  import ReviewPublishModal from './modules/ReviewPublishModal.vue';
-  import { columns, searchFormSchema } from './ReviewPublish.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './ReviewPublish.api';
-  import _default from 'ant-design-vue/es/color-picker';
-  import mounted = _default.mounted;
+  import ReviewPublishMainModal from './modules/ReviewPublishMainModal.vue';
+  import { columns, searchFormSchema } from './ReviewPublishMain.data';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './ReviewPublishMain.api';
   //注册model
   const [registerModal, { openModal }] = useModal();
   //注册table数据
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
-      title: '上线评审记录',
+      title: '上线评审系统记录',
       api: list,
       columns,
       canResize: false,
@@ -63,7 +60,7 @@
       },
     },
     exportConfig: {
-      name: '上线评审记录',
+      name: '上线评审系统记录',
       url: getExportUrl,
     },
     importConfig: {
@@ -72,16 +69,6 @@
   });
 
   const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
-
-  onMounted(() => {
-    const route = useRoute();
-    let id = route.query.id;
-    reload({
-      searchInfo: {
-        id: id,
-      },
-    });
-  });
 
   /**
    * 新增事件

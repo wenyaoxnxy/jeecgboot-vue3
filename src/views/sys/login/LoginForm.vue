@@ -120,7 +120,7 @@
 
   const formData = reactive({
     account: 'admin',
-    password: '123456',
+    password: '项目评审管理系统',
     inputCode: '',
   });
   const randCodeData = reactive({
