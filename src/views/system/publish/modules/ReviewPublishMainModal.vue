@@ -45,7 +45,7 @@
               :loading="reviewPublishChecklistResultTable.loading"
               :columns="reviewPublishChecklistResultTable.columns"
               :dataSource="reviewPublishChecklistResultTable.dataSource"
-              :maxHeight="500"
+              :maxHeight="800"
               :rowNumber="false"
               :rowSelection="false"
               :toolbar="false"

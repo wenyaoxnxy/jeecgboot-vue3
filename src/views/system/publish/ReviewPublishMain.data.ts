@@ -36,11 +36,6 @@ export const columns: BasicColumn[] = [
 //查询数据
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '系统名称',
-    field: 'systems',
-    component: 'Input',
-  },
-  {
     label: '上线日期',
     field: 'versionplan',
     component: 'Input',

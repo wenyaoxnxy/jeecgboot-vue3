@@ -31,7 +31,7 @@
           :loading="reviewCodeChecklistResultTable.loading"
           :columns="reviewCodeChecklistResultTable.columns"
           :dataSource="reviewCodeChecklistResultTable.dataSource"
-          :maxHeight="812"
+          :maxHeight="800"
           :rowNumber="false"
           :rowSelection="false"
           :toolbar="false"

@@ -80,6 +80,11 @@ export const searchFormSchema: FormSchema[] = [
       placeholder: '请选择系统名称',
     },
   },
+  {
+    label: '投产日期',
+    field: 'versionplan',
+    component: 'Input',
+  },
 ];
 
 export const formSchema: FormSchema[] = [
