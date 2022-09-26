@@ -3,7 +3,7 @@ import { GetAccountInfoModel } from './model/accountModel';
 
 enum Api {
   ACCOUNT_INFO = '/mock/account/getAccountInfo',
-  SESSION_TIMEOUT = '/mock/user/sessionTimeout',
+  SESSION_TIMEOUT = '/mock/user/sessionTimeout1',
   TOKEN_EXPIRED = '/mock/user/tokenExpired',
 }
 
