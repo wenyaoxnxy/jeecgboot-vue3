@@ -32,14 +32,14 @@
           </Checkbox>
         </FormItem>
       </ACol>
-      <ACol :span="12">
-        <FormItem :style="{ 'text-align': 'right' }">
-          <!-- No logic, you need to deal with it yourself -->
-          <Button type="link" size="small" @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">
-            {{ t('sys.login.forgetPassword') }}
-          </Button>
-        </FormItem>
-      </ACol>
+      <!--      <ACol :span="12">-->
+      <!--        <FormItem :style="{ 'text-align': 'right' }">-->
+      <!--          &lt;!&ndash; No logic, you need to deal with it yourself &ndash;&gt;-->
+      <!--          <Button type="link" size="small" @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">-->
+      <!--            {{ t('sys.login.forgetPassword') }}-->
+      <!--          </Button>-->
+      <!--        </FormItem>-->
+      <!--      </ACol>-->
     </ARow>
 
     <FormItem class="enter-x">
@@ -80,7 +80,7 @@
     -->
   </Form>
   <!-- 第三方登录相关弹框 -->
-  <ThirdModal ref="thirdModalRef"></ThirdModal>
+  <ThirdModal ref="thirdModalRef" />
 </template>
 <script lang="ts" setup>
   import { reactive, ref, toRaw, unref, computed, onMounted } from 'vue';
