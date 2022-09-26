@@ -58,6 +58,6 @@ export const step2Schemas: FormSchema[] = [
     component: 'InputPassword',
     label: '支付密码',
     required: true,
-    defaultValue: '123456',
+    defaultValue: '',
   },
 ];

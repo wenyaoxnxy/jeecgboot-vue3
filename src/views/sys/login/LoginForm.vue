@@ -119,7 +119,7 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'admin',
+    account: '',
     password: '项目评审管理系统',
     inputCode: '',
   });
