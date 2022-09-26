@@ -1,8 +1,20 @@
+// @ts-ignore
+
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 import { JVxeTypes, JVxeColumn } from '/@/components/jeecg/JVxeTable/types';
+import { filterMultiDictText } from '/@/utils/dict/JDictSelectUtil.js';
+import { ref } from 'vue';
+import { initDictOptions } from '/@/utils/dict';
+// eslint-disable-next-line no-unused-vars
+let dictOptions = [];
+const getConfig = async function () {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  dictOptions = await initDictOptions('review_members');
+};
+getConfig();
 //列表数据
 export const columns: BasicColumn[] = [
   {
@@ -48,9 +60,9 @@ export const columns: BasicColumn[] = [
     title: '评审人员',
     align: 'center',
     dataIndex: 'reviewMembers',
-    // customRender: ({ text }) => {
-    //   return render.renderDict(text, 'review_members');
-    // },
+    customRender: (text) => {
+      return text.text ? filterMultiDictText(dictOptions, text.text) : '';
+    },
   },
 ];
 //查询数据

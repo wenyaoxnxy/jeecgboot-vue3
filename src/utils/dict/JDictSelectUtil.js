@@ -99,6 +99,7 @@ export function filterMultiDictText(dictOptions, text) {
       }
     }
   });
+
   if (re == '') {
     return text;
   }

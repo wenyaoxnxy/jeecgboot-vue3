@@ -5,7 +5,13 @@ import { render } from '/@/utils/common/renderUtils';
 import { JVxeTypes, JVxeColumn } from '/@/components/jeecg/JVxeTable/types';
 import { readonly, ref, unref } from "vue";
 import { filterMultiDictText } from '/@/utils/dict/JDictSelectUtil.js';
-const dictOptions = ref<any>([]);
+import { initDictOptions } from '/@/utils/dict';
+let dictOptions = [];
+const getConfig = async function () {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  dictOptions = await initDictOptions('review_members');
+};
+getConfig();
 //列表数据
 export const columns: BasicColumn[] = [
   {
@@ -48,6 +54,9 @@ export const columns: BasicColumn[] = [
     title: '评审人员',
     align: 'center',
     dataIndex: 'reviewMembers',
+    customRender: (text) => {
+      return text.text ? filterMultiDictText(dictOptions, text.text) : '';
+    },
     // customRender: ({ text }) =>//(text ? //filterMultiDictText(dictOptions.value['review_members'], text) : ''),
     //   (text ? filterMultiDictText(unref(dictOptions)['review_members'],text) : ''),
   },

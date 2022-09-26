@@ -44,19 +44,21 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, computed, unref, reactive } from 'vue';
+  import { ref, computed, unref, reactive, onMounted } from "vue";
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods.ts';
   import { formSchema, reviewCodeDetailColumns, reviewCodeChecklistResultColumns } from '../ReviewCode.data';
   import { saveOrUpdate, reviewCodeDetailList, reviewCodeChecklistResultList } from '../ReviewCode.api';
   import { VALIDATE_FAILED } from '/@/utils/common/vxeUtils';
+  import { initDictOptions } from "/@/utils/dict";
   // Emits声明
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
   const refKeys = ref(['reviewCodeDetail', 'reviewCodeChecklistResult']);
   const activeKey = ref('reviewCodeDetail');
   const reviewCodeDetail = ref();
+  const dictOptions = ref<any>([]);
   const reviewCodeChecklistResult = ref();
   const tableRefs = { reviewCodeDetail, reviewCodeChecklistResult };
   const reviewCodeDetailTable = reactive({
@@ -127,6 +129,18 @@
       setModalProps({ confirmLoading: false });
     }
   }
+
+  /**
+   * 初始化字典选项
+   */
+  async function initDictConfig() {
+    dictOptions.value['review_members'] = await initDictOptions('review_members');
+  }
+
+  onMounted(() => {
+    //初始化字典选项
+    initDictConfig();
+  });
 </script>
 
 <style lang="less" scoped></style>

@@ -22,19 +22,22 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, computed, unref, reactive } from 'vue';
+  import { ref, computed, unref, reactive, onMounted } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { useJvxeMethod } from '/@/hooks/system/useJvxeMethods.ts';
   import { formSchema, reviewDesignDetailColumns } from '../ReviewDesign.data';
   import { saveOrUpdate, reviewDesignDetailList } from '../ReviewDesign.api';
   import { VALIDATE_FAILED } from '/@/utils/common/vxeUtils';
+  import { initDictOptions } from '/@/utils/dict';
+  import { loadCategoryData } from '/@/api/common/api';
   // Emits声明
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
   const refKeys = ref(['reviewDesignDetail']);
   const activeKey = ref('reviewDesignDetail');
   const reviewDesignDetail = ref();
+  const dictOptions = ref<any>([]);
   const tableRefs = { reviewDesignDetail };
   const reviewDesignDetailTable = reactive({
     loading: false,
@@ -96,6 +99,18 @@
       setModalProps({ confirmLoading: false });
     }
   }
+
+  /**
+   * 初始化字典选项
+   */
+  async function initDictConfig() {
+    dictOptions.value['review_members'] = await initDictOptions('review_members');
+  }
+
+  // onMounted(() => {
+  //   //初始化字典选项
+  //   initDictConfig();
+  // });
 </script>
 
 <style lang="less" scoped></style>
