@@ -1,6 +1,7 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { render } from '/@/utils/common/renderUtils';
+import { JVxeTypes } from '/@/components/jeecg/JVxeTable/src/types';
 
 export const columns: BasicColumn[] = [
   {
@@ -29,14 +30,14 @@ export const columns: BasicColumn[] = [
       return render.renderDict(text, 'system_name');
     },
   },
-  {
-    title: '概要设计评审',
-    dataIndex: 'reviewDesign',
-    width: '120px',
-    customRender: ({ text }) => {
-      return render.renderDict(text, 'review_status');
-    },
-  },
+  // {
+  //   title: '概要设计评审',
+  //   dataIndex: 'reviewDesign',
+  //   width: '120px',
+  //   customRender: ({ text }) => {
+  //     return render.renderDict(text, 'review_status');
+  //   },
+  // },
   {
     title: '代码评审',
     dataIndex: 'reviewCode',
@@ -119,15 +120,15 @@ export const formSchema: FormSchema[] = [
       placeholder: '请选择系统名称',
     },
   },
-  {
-    label: '概要设计评审',
-    field: 'reviewDesign',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'review_status',
-      placeholder: '评审阶段',
-    },
-  },
+  // {
+  //   label: '概要设计评审',
+  //   field: 'reviewDesign',
+  //component: 'JDictSelectTag',
+  // componentProps: {
+  //   dictCode: 'review_status',
+  //   placeholder: '评审阶段',
+  // },
+  // },
   {
     label: '代码评审',
     field: 'reviewCode',

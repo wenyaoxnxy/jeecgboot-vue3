@@ -222,10 +222,10 @@
    */
   function getDropDownAction(record) {
     return [
-      {
-        label: '发起概要设计评审',
-        onClick: handDesignReview.bind(null, record),
-      },
+      // {
+      //   label: '发起概要设计评审',
+      //   onClick: handDesignReview.bind(null, record),
+      // },
       {
         label: '发起代码评审',
         onClick: handCodeReview.bind(null, record),
