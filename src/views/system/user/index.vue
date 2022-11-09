@@ -236,7 +236,7 @@
       {
         label: '编辑',
         onClick: handleEdit.bind(null, record),
-        // ifShow: () => hasPermission('system:user:edit'),
+        // ifShow: () => hasPermission('system:项目评审管理'),
       },
     ];
   }
